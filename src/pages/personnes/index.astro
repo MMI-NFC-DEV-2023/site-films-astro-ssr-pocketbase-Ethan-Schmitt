@@ -1,6 +1,7 @@
 ---
 import { pb } from "../../backend";
 import { Debug } from "astro:components";
+export const prerender = false;
 
 const personnes= await pb.collection("personnes").getFullList();
 
