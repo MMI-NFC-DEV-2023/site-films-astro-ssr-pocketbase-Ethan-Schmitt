@@ -1,3 +1,4 @@
 import Pocketbase from 'pocketbase';
-export const  pb = new Pocketbase("http://0.0.0.0:8090")
+import type { TypedPocketBase } from './pocketbase-typegen';
+export const  pb = new Pocketbase(import.meta.env.VITE_URL_POCKETBASE) as TypedPocketBase;
 
