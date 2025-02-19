@@ -1,11 +1,16 @@
 ---
+import { Debug } from 'astro:components';
 import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import type { PersonnesResponse, FilmsResponse } from '../pocketbase-typegen';
+type Response = PersonnesResponse<{films_via_producteur: FilmsResponse[]}>;
+const listPersonnes = await Astro.locals.pb
+  .collection("Personnes")
+  .getFullList({exapnd: "films_via_producteur"});
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout pageTitle="Accueil">
 	<h1>Bienvenue sur le site de la formation Astro</h1>
+	<Debug>{listPersonnes} />
 </Layout>
