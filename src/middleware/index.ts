@@ -3,7 +3,7 @@ import PocketBase from 'pocketbase';
 import { defineMiddleware } from 'astro/middleware';
 
 export const onRequest = defineMiddleware(async ({ locals, request }: any, next: () => any) => {
-    locals.pb = new PocketBase(import.meta.env.VITE_URL_POCKETBASE);
+    locals.pb = new PocketBase(import.meta.env.PUBLIC_POKEAPI);
 
     // load the store data from the request cookie string
     locals.pb.authStore.loadFromCookie(request.headers.get('cookie') || '');

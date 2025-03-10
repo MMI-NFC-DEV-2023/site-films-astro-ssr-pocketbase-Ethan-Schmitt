@@ -26,13 +26,13 @@ const film = await Astro.locals.pb
 <Layout pageTitle={`film : ${film.titre}`}>
   <div>
           <h2>Film : {film.titre}</h2>
-          <p>Année de sortie : {film.dateSortie}</p>
+          <p>Année de sortie : {film.date_sortie}</p>
           {  film.expand?.producteur &&      <p>Producteur : <LinkPersonne {...film.expand?.producteur!}/></p>}
           {film.expand?.scenaristes && <p>Scénaristes : {film.expand?.scenaristes.map(s => (<LinkPersonne {...s}/>))}</p>}
           <p>Durée : {film.duree} minutes</p>
           { film.expand?.role &&  <p>Les roles :
               {film.expand?.role.map(r =>
-              <span>Nom du role : {r.nomRole + ", "}</span>
+              <span>Nom du role : {r.nom_role + ", "}</span>
               <span>Joué par : <LinkPersonne {...r.expand?.acteur!} /> </span>)}</p>
           }
   </div>
