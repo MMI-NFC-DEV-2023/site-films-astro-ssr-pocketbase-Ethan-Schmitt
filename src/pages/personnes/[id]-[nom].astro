@@ -4,6 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import type { PersonnesResponse, FilmsResponse, RolesResponse } from "../../pocketbase-typegen";
 import LinkFilm from "../../components/LinkFilm.astro";
 const id = Astro.params.id;
+const pb = Astro.locals.pb;
 
 export const prerender = false;
 
@@ -14,11 +15,13 @@ const personne = await Astro.locals.pb.collection<PersonnesResponse<{films_via_p
 ---
 
 <!-- <pre>{JSON.stringify(personnes, null, 2)}</pre> -->
-<Layout>
+<Layout pageTitle="Liste des personnes">
         <div>
             <h2>
                 {personne.prenom} {personne.nom} 
             </h2>
+             {Astro.locals.pb.authStore.isValid && <a href={`/personnes/edit/${personne.id}`}>Modifier</a>}
+             
              {personne.expand?.films_via_producteur && <p>Les films où il est producteur :{" "}
                 {personne.expand?.films_via_producteur?.map((film) => (
                     <span>{film.titre }</span>
