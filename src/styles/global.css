@@ -1,1 +1,26 @@
 @import "tailwindcss";
+
+@layer utilities{
+    .lien{
+        @apply text-blue-500;
+    }
+}
+
+/* Styles pour le menu de navigation */
+.navbar {
+    background-color: #333;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ff6347; /* Couleur de survol */
+}

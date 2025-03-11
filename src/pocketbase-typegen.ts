@@ -91,26 +91,37 @@ export type SuperusersRecord = {
 export type FilmsRecord = {
 	created?: IsoDateString
 	date_sortie?: IsoDateString
-	duree?: number
+	duree?: string
 	id: string
 	langue?: string
 	producteur?: RecordIdString
 	roles?: RecordIdString[]
-	scenaristes?: RecordIdString[]
+	scenariste?: RecordIdString[]
 	synopsis?: string
 	titre?: string
 	updated?: IsoDateString
 }
 
+export enum PersonnesNationaliteOptions {
+	"FR" = "FR",
+	"US" = "US",
+	"UK" = "UK",
+}
+
+export enum PersonnesProfessionOptions {
+	"realisateur" = "realisateur",
+	"scenariste" = "scenariste",
+}
 export type PersonnesRecord = {
 	created?: IsoDateString
-	dateDeces?: IsoDateString
-	dateNaissance?: IsoDateString
+	date_deces?: IsoDateString
+	date_naissance?: IsoDateString
 	id: string
-	lieuNaissance?: string
-	nationalite?: string
+	lieu_naissance?: string
+	nationalite?: PersonnesNationaliteOptions
 	nom?: string
 	prenom?: string
+	profession?: PersonnesProfessionOptions
 	updated?: IsoDateString
 }
 

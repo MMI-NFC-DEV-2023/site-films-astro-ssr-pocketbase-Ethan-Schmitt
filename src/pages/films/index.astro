@@ -3,14 +3,16 @@ import { Debug } from "astro:components";
 import Layout from "../../layouts/Layout.astro";
 import type { FilmsResponse, PersonnesResponse, RolesResponse } from "../../pocketbase-typegen";
 import LinkFilm from "../../components/LinkFilm.astro";
-export const prerender = false
+import type { ACTION_ERROR_CODES } from "astro:actions";
+type Response = FilmsResponse<{producteur : PersonnesResponse; scenariste: PersonnesResponse[]; role: RolesResponse<{acteur : PersonnesResponse}>[]}>;
+export const prerender = false;
 
-const listFilms = await Astro.locals.pb.collection("films")
-    .getFullList();
+const films = await Astro.locals.pb.collection<Response>("films").getFullList({expand: "producteur, scenariste, role.acteur"});
 
 ---
 
-<Layout pageTitle="Liste des personnes">
-    {listFilms.map(film => <LinkFilm {...film} />)}
-    <Debug {listFilms} />
+<!-- <pre>{JSON.stringify(personnes, null, 2)}</pre> -->
+ <Layout>
+    {films.map(film => <LinkFilm {...film}/>)}
+    <Debug {films} />
 </Layout>
