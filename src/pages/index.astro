@@ -1,12 +1,12 @@
 ---
 import { Debug } from 'astro:components';
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 import type { PersonnesResponse, FilmsResponse } from '../pocketbase-typegen';
 type Response = PersonnesResponse<{films_via_producteur: FilmsResponse[]}>;
+export const prerender = false;
 const listPersonnes = await Astro.locals.pb
   .collection("Personnes")
-  .getFullList({exapnd: "films_via_producteur"});
+  .getFullList({expand: "films_via_producteur"});
 
 ---
 
